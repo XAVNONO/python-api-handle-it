@@ -1,7 +1,7 @@
 pipeline {
 
       environment {
-        imagename = "vanessakovalsky/my-image-python"
+        imagename = "xavnono/my-image-python"
         registryCredential = 'docker'
       }
 
@@ -9,7 +9,7 @@ pipeline {
       stages {
         stage('Clone sources') {
             steps {
-                git url: 'https://github.com/vanessakovalsky/python-api-handle-it.git'
+                git url: 'https://github.com/xavnono/python-api-handle-it.git'
             }
         }
         stage('continuous integration') { // Compile and do unit testing
@@ -67,7 +67,7 @@ pipeline {
 
         stage('Test image docker') {
             steps {
-                sh 'docker run -d --name my-image-python -p 3002:3002 --rm vanessakovalsky/my-image-python'
+                sh 'docker run -d --name my-image-python -p 3002:3002 --rm xavnono/my-image-python'
             }
         }
 
