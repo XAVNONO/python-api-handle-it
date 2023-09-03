@@ -29,14 +29,14 @@ pipeline {
              }
            }
 
-        // stage('testcode') {
-            //  tools {
-            //    gradle 'installGradle'
-            //  }
-        //     steps {
-        //         sh 'gradle test'
-        //     }
-        // }
+        stage('testcode') {
+             tools {
+               gradle 'installGradle'
+             }
+            steps {
+                sh 'gradle test'
+            }
+        }
         
         stage('Package and deploy') {
              tools {
