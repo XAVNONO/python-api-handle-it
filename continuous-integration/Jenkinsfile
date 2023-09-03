@@ -12,7 +12,7 @@ pipeline {
                 git url: 'https://github.com/xavnono/python-api-handle-it.git'
             }
         }
-        /*stage('continuous integration') { // Compile and do unit testing
+        stage('continuous integration') { // Compile and do unit testing
              tools {
                gradle 'installGradle'
              }
@@ -27,7 +27,7 @@ pipeline {
                     }
                 )
              }
-           }*/
+           }
 
         // stage('testcode') {
         //      tools {
