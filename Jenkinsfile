@@ -1,5 +1,6 @@
-node{
-
+pipeline {
+    agent any
+    
     //>>>>>Définition projet et versionning image
     def registryProjet='registry.gitlab.com/xavnono/presentations-jenkins/TP3' 
     def DockerImage="${registryProjet}:version-${env.BUILD_ID}"
