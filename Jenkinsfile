@@ -1,8 +1,10 @@
-pipeline {
+node{
 
     //>>>>>Définition projet et versionning image
     def registryProjet='registry.gitlab.com/xavnono/presentations-jenkins/TP3' 
-    def IMAGE="${registryProjet}:version-${env.BUILD_ID}"
+    def DockerImage="${registryProjet}:version-${env.BUILD_ID}"
+    def DockerImage2="${registryProjet}:version-${env.BUILD_ID}"
+    def DockerImage3="${registryProjet}:version-${env.BUILD_ID}"
 
     agent any
     stages {
@@ -15,15 +17,15 @@ pipeline {
         stage('Build Pylint image') {
             steps {
                 script {
-                    dockerImage = docker.build("xavnono/mypylint:latest","-f docker-test/pylint/Dockerfile docker-test/pylint/")
+                    DockerImage = docker.build("xavnono/mypylint:latest","-f docker-test/pylint/Dockerfile docker-test/pylint/")
                 }
             }
         }
         
         stage('Push pylint image') {
             docker.withRegistry('https://registry.gitlab.com', 'reg1') {
-                dockerImage.push 'latest'
-                dockerImage.push()
+                DockerImage.push 'latest'
+                DockerImage.push()
                     }
         }
         
@@ -43,15 +45,15 @@ pipeline {
         stage('Build Unittest image') {
             steps {
                 script {
-                    dockerImage2 = docker.build("xavnono/myunittest:latest","-f docker-test/unittest/Dockerfile docker-test/unittest/")
+                    DockerImage2 = docker.build("xavnono/myunittest:latest","-f docker-test/unittest/Dockerfile docker-test/unittest/")
                 }
             }
         }
         
         stage('Push unittest image') {
             docker.withRegistry('https://registry.gitlab.com', 'reg1') {
-                dockerImage2.push 'latest'
-                dockerImage2.push()
+                DockerImage2.push 'latest'
+                DockerImage2.push()
                     }
         }
         
@@ -72,14 +74,14 @@ pipeline {
         stage('Build image') {
             steps {
                 script {
-                    dockerImage3 = docker.build("xavnono/mypythonapp:latest","-f docker-app/python/Dockerfile .")
+                    DockerImage3 = docker.build("xavnono/mypythonapp:latest","-f docker-app/python/Dockerfile .")
                 }
             }
         }
          stage('Push image') {
             docker.withRegistry('https://registry.gitlab.com', 'reg1') {
-                dockerImage3.push 'latest'
-                dockerImage3.push()
+                DockerImage3.push 'latest'
+                DockerImage3.push()
                     }
         }
     }
