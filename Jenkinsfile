@@ -1,11 +1,11 @@
 pipeline {
     agent any
 
-    // //>>>>>Définition projet et versionning image
-    // def registryProjet='registry.gitlab.com/xavnono/presentations-jenkins/TP3' 
-    // def DockerImage="${registryProjet}:version-${env.BUILD_ID}"
-    // def DockerImage2="${registryProjet}:version-${env.BUILD_ID}"
-    // def DockerImage3="${registryProjet}:version-${env.BUILD_ID}"
+    //>>>>>Définition projet et versionning image
+    def registryProjet='registry.gitlab.com/xavnono/presentations-jenkins/TP3' 
+    def DockerImage="${registryProjet}:version-${env.BUILD_ID}"
+    def DockerImage2="${registryProjet}:version-${env.BUILD_ID}"
+    def DockerImage3="${registryProjet}:version-${env.BUILD_ID}"
 
     stages {
         stage('Clone repository') {
