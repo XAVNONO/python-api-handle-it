@@ -6,7 +6,6 @@ node{
     def DockerImage2="${registryProjet}:version-${env.BUILD_ID}"
     def DockerImage3="${registryProjet}:version-${env.BUILD_ID}"
 
-    agent any
     stages {
         stage('Clone repository') {
             steps {
