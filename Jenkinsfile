@@ -1,12 +1,5 @@
 pipeline {
     agent any
-
-    //>>>>>Définition projet et versionning image
-    def registryProjet='registry.gitlab.com/xavnono/presentations-jenkins/TP3' 
-    def DockerImage="${registryProjet}:version-${env.BUILD_ID}"
-    def DockerImage2="${registryProjet}:version-${env.BUILD_ID}"
-    def DockerImage3="${registryProjet}:version-${env.BUILD_ID}"
-
     stages {
         stage('Clone repository') {
             steps {
@@ -17,16 +10,19 @@ pipeline {
         stage('Build Pylint image') {
             steps {
                 script {
-                    DockerImage = docker.build("xavnono/mypylint:latest","-f docker-test/pylint/Dockerfile docker-test/pylint/")
+                    DockerImage1 = docker.build("xavnono/mypylint:latest","-f docker-test/pylint/Dockerfile docker-test/pylint/")
                 }
             }
         }
         
         stage('Push pylint image') {
-            docker.withRegistry('https://registry.gitlab.com', 'reg1') {
-                DockerImage.push 'latest'
-                DockerImage.push()
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'reg2', url: 'https://hub.docker.com/repository/docker/xavnono/image_python-api-handle-it') {
+                    dockerImage1.push()
                     }
+                }
+            }
         }
         
         stage ('Pylint'){
@@ -51,10 +47,13 @@ pipeline {
         }
         
         stage('Push unittest image') {
-            docker.withRegistry('https://registry.gitlab.com', 'reg1') {
-                DockerImage2.push 'latest'
-                DockerImage2.push()
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'reg2', url: 'https://hub.docker.com/repository/docker/xavnono/image_python-api-handle-it') {
+                    dockerImage2.push()
                     }
+                }
+            }
         }
         
         stage ('Unit tests'){
@@ -79,10 +78,13 @@ pipeline {
             }
         }
          stage('Push image') {
-            docker.withRegistry('https://registry.gitlab.com', 'reg1') {
-                DockerImage3.push 'latest'
-                DockerImage3.push()
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'reg2', url: 'https://hub.docker.com/repository/docker/xavnono/image_python-api-handle-it') {
+                    dockerImage3.push()
                     }
-        }
+                }
+            }
+         }
     }
 }  
