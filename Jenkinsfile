@@ -59,7 +59,7 @@ pipeline {
         stage ('Unit tests'){
             agent {
                 docker {
-                    image 'vanessakovalsky/myunittest'
+                    image 'xavnono/myunittest'
                     args '-v ${PWD}:/app'
                     reuseNode true
                 }
