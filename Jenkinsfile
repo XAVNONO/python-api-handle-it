@@ -18,7 +18,7 @@ pipeline {
         stage('Push pylint image') {
             steps {
                 script {
-                    withDockerRegistry(credentialsId: 'reg3', url: 'https://hub.docker.com/repository/docker/xavnono/image_python-api-handle-it') {
+                    withDockerRegistry(credentialsId: 'reg2', url: 'https://hub.docker.com/repository/docker/xavnono/image_python-api-handle-it') {
                     dockerImage1.push()
                     }
                 }
@@ -49,7 +49,7 @@ pipeline {
         stage('Push unittest image') {
             steps {
                 script {
-                    withDockerRegistry(credentialsId: 'reg3', url: 'https://hub.docker.com/repository/docker/xavnono/image_python-api-handle-it') {
+                    withDockerRegistry(credentialsId: 'reg2', url: 'https://hub.docker.com/repository/docker/xavnono/image_python-api-handle-it') {
                     dockerImage2.push()
                     }
                 }
@@ -80,7 +80,7 @@ pipeline {
          stage('Push image') {
             steps {
                 script {
-                    withDockerRegistry(credentialsId: 'reg3', url: 'https://hub.docker.com/repository/docker/xavnono/image_python-api-handle-it') {
+                    withDockerRegistry(credentialsId: 'reg2', url: 'https://hub.docker.com/repository/docker/xavnono/image_python-api-handle-it') {
                     dockerImage3.push()
                     }
                 }
