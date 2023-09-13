@@ -20,9 +20,13 @@ pipeline {
     // def IMAGE="${registryProjet}:version-${env.BUILD_ID}"
         
         stage('Push pylint image') {
-        docker.withRegistry('https://registry.gitlab.com', 'reg1') {
-            img.push 'latest'
-            img.push()
+            steps {
+                script {
+                    docker.withRegistry('https://registry.gitlab.com', 'reg1') {
+                    DockerImage1.push 'latest'
+                    DockerImage1.push()
+                    }
+                }
             }
         }
     }
