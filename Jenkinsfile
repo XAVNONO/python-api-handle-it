@@ -8,7 +8,7 @@ node{
             }
 
     def DockerImage1 = stage('Build Pylint image') {   
-        docker.build("xavnono/$IMAGE","-f docker-test/pylint/Dockerfile docker-test/pylint/")
+        docker.build("$IMAGE","-f docker-test/pylint/Dockerfile docker-test/pylint/")
                 }
         
         stage('Push pylint image') {
