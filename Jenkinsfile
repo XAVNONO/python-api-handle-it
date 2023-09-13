@@ -17,4 +17,17 @@ node{
                     DockerImage1.push()
             }
         }
+
+        stage ('Pylint'){
+            agent {
+                docker {
+                    image '$IMAGE'
+                    args '-v ${PWD}:/app'
+                    reuseNode true
+                }
+            }
+            steps {
+                sh 'pylint --recursive yes --exit-zero app '
+            }
+        }
     }
