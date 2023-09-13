@@ -8,7 +8,7 @@ node{
             }
 
     def DockerImage1 = stage('Build Pylint image') {   
-        docker.build("$IMAGE","-f docker-test/pylint/Dockerfile docker-test/pylint/")
+        docker.build("xavnono/$IMAGE","-f docker-test/pylint/Dockerfile docker-test/pylint/")
                 }
         
         stage('Push pylint image') {
@@ -21,7 +21,7 @@ node{
         stage ('Pylint'){
             agent {
                 docker {
-                    image "xavnono/python-api-handle-it"
+                    image "xavnono/$IMAGE"
                     args '-v ${PWD}:/app'
                     reuseNode true
                 }
