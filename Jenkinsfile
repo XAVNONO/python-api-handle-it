@@ -21,7 +21,7 @@ node{
         stage ('Pylint'){
             agent {
                 docker {
-                    image '$IMAGE'
+                    image "$IMAGE"
                     args '-v ${PWD}:/app'
                     reuseNode true
                 }
