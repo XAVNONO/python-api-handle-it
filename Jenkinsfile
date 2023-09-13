@@ -16,8 +16,8 @@ pipeline {
             }
         }
 
-    def registryProjet='registry.gitlab.com/xavnono/presentations-jenkins' 
-    def IMAGE="${registryProjet}:version-${env.BUILD_ID}"
+    // def registryProjet='registry.gitlab.com/xavnono/presentations-jenkins' 
+    // def IMAGE="${registryProjet}:version-${env.BUILD_ID}"
         
         stage('Push pylint image') {
         docker.withRegistry('https://registry.gitlab.com', 'reg1') {
