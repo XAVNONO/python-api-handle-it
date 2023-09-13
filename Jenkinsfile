@@ -21,7 +21,7 @@ node{
         stage ('Pylint'){
             agent {
                 docker {
-                    image "$IMAGE"
+                    image "registry.gitlab.com/xavnono/python-api-handle-it:latest"
                     args '-v ${PWD}:/app'
                     reuseNode true
                 }
