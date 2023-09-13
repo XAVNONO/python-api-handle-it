@@ -21,13 +21,14 @@ node{
         stage ('Pylint'){
             agent {
                 docker {
-                    image "xavnono/python-api-handle-it:latest"
+                    image "xavnono/python-api-handle-it"
                     args '-v ${PWD}:/app'
                     reuseNode true
                 }
             }
             steps {
-                sh 'pylint --recursive yes --exit-zero app '
+                sh 'mkdir -p app/reports/pylint; pylint --output-format json --recursive yes --exit-zero app > app/reports/pylint/report.json;pylint-json2html -o app/reports/pylint/report.html app/reports/pylint/report.json'
+            }
             }
         }
     }
