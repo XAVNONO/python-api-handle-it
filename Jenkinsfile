@@ -10,7 +10,7 @@ pipeline {
         stage('Build Pylint image') {
             steps {
                 script {
-                    DockerImage1 = docker.build("xavnono/mypylint:latest","-f docker-test/pylint/Dockerfile docker-test/pylint/")
+                    DockerImage = docker.build("xavnono/mypylint:latest","-f docker-test/pylint/Dockerfile docker-test/pylint/")
                 }
             }
         }
@@ -19,7 +19,7 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'reg2', url: '') {
-                    dockerImage1.push()
+                    dockerImage.push()
                     }
                 }
             }
@@ -73,7 +73,7 @@ pipeline {
         stage('Build image') {
             steps {
                 script {
-                    DockerImage3 = docker.build("xavnono/mypythonapp:latest","-f docker-app/python/Dockerfile .")
+                    DockerImage = docker.build("xavnono/mypythonapp:latest","-f docker-app/python/Dockerfile .")
                 }
             }
         }
@@ -81,7 +81,7 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'reg2', url: '') {
-                    dockerImage3.push()
+                    dockerImage.push()
                     }
                 }
             }
