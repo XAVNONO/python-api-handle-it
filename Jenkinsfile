@@ -1,9 +1,10 @@
 pipeline {
 
         environment {
-        registry = "xavnono/image_python-api-handle-it"
+        registry = "xavnono/mypylint"
         registryCredential = 'dockerhub'
         dockerImage = ''
+        dockerImage2 = ''
         }
 
     agent any
@@ -48,7 +49,7 @@ pipeline {
         stage('Build Unittest image') {
             steps {
                 script {
-                    DockerImage2 = docker.build("xavnono/myunittest:latest","-f docker-test/unittest/Dockerfile docker-test/unittest/")
+                    DockerImage2 = docker.build (registry + ":$BUILD_NUMBER","-f docker-test/unittest/Dockerfile docker-test/unittest/")
                 }
             }
         }
@@ -56,7 +57,7 @@ pipeline {
         stage('Push unittest image') {
             steps {
                 script {
-                    withDockerRegistry(credentialsId: 'reg2', url: '') {
+                    docker.withRegistry( '', registryCredential ) {
                     dockerImage2.push()
                     }
                 }
