@@ -58,7 +58,7 @@ pipeline {
         stage('Push unittest image') {
             steps {
                 script {
-                    docker.withRegistry( '', registryCredential ) {
+                    docker.withRegistry2( '', registryCredential ) {
                     dockerImage2.push()
                     }
                 }
