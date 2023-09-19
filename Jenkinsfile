@@ -3,9 +3,11 @@ pipeline {
         environment {
         registry = "xavnono/mypylint"
         registry2 = "xavnono/myunittest"
+        registry3 = "xavnono/mypythonapp"
         registryCredential = 'dockerhub'
         dockerImage = ''
         dockerImage2 = ''
+        dockerImage3 = ''
         }
 
     agent any
@@ -82,15 +84,15 @@ pipeline {
         stage('Build image') {
             steps {
                 script {
-                    DockerImage = docker.build("xavnono/mypythonapp:latest","-f docker-app/python/Dockerfile .")
+                    dockerImage3 = docker.build (registry3 + ":$BUILD_NUMBER","-f docker-app/python/Dockerfile .")
                 }
             }
         }
          stage('Push image') {
             steps {
                 script {
-                    withDockerRegistry(credentialsId: 'reg2', url: '') {
-                    dockerImage.push()
+                    docker.withRegistry( '', registryCredential ) {
+                    dockerImage3.push()
                     }
                 }
             }
