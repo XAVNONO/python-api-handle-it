@@ -50,7 +50,7 @@ pipeline {
         stage('Build Unittest image') {
             steps {
                 script {
-                    DockerImage2 = docker.build (registry2 + ":$BUILD_NUMBER","-f docker-test/unittest/Dockerfile docker-test/unittest/")
+                    dockerImage2 = docker.build (registry2 + ":$BUILD_NUMBER","-f docker-test/unittest/Dockerfile docker-test/unittest/")
                 }
             }
         }
