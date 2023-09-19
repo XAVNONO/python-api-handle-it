@@ -1,7 +1,14 @@
 pipeline {
+
+        environment {
+        registry = "xavnono/image_python-api-handle-it"
+        registryCredential = 'dockerhub'
+        dockerImage = ''
+        }
+
     agent any
     stages {
-        stage('Clone repository') {
+        stage('Clone Github') {
             steps {
                 git credentialsId: 'token-github', url: 'https://github.com/XAVNONO/python-api-handle-it.git'
             }
@@ -10,7 +17,7 @@ pipeline {
         stage('Build Pylint image') {
             steps {
                 script {
-                    DockerImage = docker.build("xavnono/mypylint:latest","-f docker-test/pylint/Dockerfile docker-test/pylint/")
+                    dockerImage = docker.build (registry + ":$BUILD_NUMBER","-f docker-test/pylint/Dockerfile docker-test/pylint/")
                 }
             }
         }
@@ -18,7 +25,7 @@ pipeline {
         stage('Push pylint image') {
             steps {
                 script {
-                    withDockerRegistry(credentialsId: 'reg2', url: '') {
+                    docker.withRegistry( '', registryCredential ) {
                     dockerImage.push()
                     }
                 }
