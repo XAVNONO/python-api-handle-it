@@ -2,6 +2,7 @@ pipeline {
 
         environment {
         registry = "xavnono/mypylint"
+        registry2 = "xavnono/myunittest"
         registryCredential = 'dockerhub'
         dockerImage = ''
         dockerImage2 = ''
@@ -49,7 +50,7 @@ pipeline {
         stage('Build Unittest image') {
             steps {
                 script {
-                    DockerImage2 = docker.build (registry + ":$BUILD_NUMBER","-f docker-test/unittest/Dockerfile docker-test/unittest/")
+                    DockerImage2 = docker.build (registry2 + ":$BUILD_NUMBER","-f docker-test/unittest/Dockerfile docker-test/unittest/")
                 }
             }
         }
@@ -64,7 +65,7 @@ pipeline {
             }
         }
         
-        stage ('Unit tests'){
+        stage ('Unittests'){
             agent {
                 docker {
                     image 'xavnono/myunittest'
